@@ -9,9 +9,13 @@ public final class Measurement {
 
     @Override
     public boolean equals(Object obj) {
-         Measurement other = (Measurement)obj;
+        Measurement other = (Measurement) obj;
 
-        return this.unit.returnInch(this.value) == other.unit.returnInch(other.value);
+        return this.representAsInch() == other.representAsInch();
 
+    }
+
+    private double representAsInch() {
+        return this.unit.representAsInch(this.value);
     }
 }
