@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
 public class MeasurementTest {
@@ -27,5 +28,10 @@ public class MeasurementTest {
     public void shouldThrowExceptionIfUnitValueIsNegative() throws Exception {
         new Measurement(-1, Unit.Inch);
 
+    }
+
+    @Test
+    public void shouldVerifyThatOneInchIsNotNull() {
+        assertNotNull(new Measurement(1, Unit.Inch));
     }
 }
