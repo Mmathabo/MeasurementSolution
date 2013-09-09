@@ -2,7 +2,8 @@ public final class Measurement {
     private final double value;
     private final Unit unit;
 
-    public Measurement(double value, Unit unit) {
+    public Measurement(double value, Unit unit) throws IllegalArgumentException {
+        if (value < 0) throw new IllegalArgumentException();
         this.value = value;
         this.unit = unit;
     }
