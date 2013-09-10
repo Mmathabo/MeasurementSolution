@@ -12,12 +12,22 @@ public final class Measurement {
     public boolean equals(Object obj) {
         if (obj instanceof Measurement) {
             Measurement other = (Measurement) obj;
-            return this.representAsInch() == other.representAsInch();
+
+            return this.unit.toBaseUnitValue(value) == other.unit.toBaseUnitValue(other.value)
+                    && this.unit.areMeasurementUnitsEqual(other.unit.measurementUnit);
         }
+
         return false;
     }
 
-    private double representAsInch() {
-        return this.unit.representAsInch(this.value);
+    public Measurement plus(Measurement other) {
+        if (!this.unit.areMeasurementUnitsEqual(other.unit.measurementUnit))
+            throw new IllegalArgumentException();
+
+        return new Measurement(sumOfValues(other), Unit.toBaseUnit(unit));
+    }
+
+    private double sumOfValues(Measurement other) {
+        return unit.toBaseUnitValue(value) + other.unit.toBaseUnitValue(other.value);
     }
 }
